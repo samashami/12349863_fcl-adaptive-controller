@@ -3,7 +3,7 @@
 **Working Title:** Federated-Continual Learning with an Adaptive Policy Controller (LLM-ready roadmap)  
 **Project Type:** Reproduction + Extension (research-engineering hybrid)  
 **Student:** Somayeh Shami  
-**Course:** Applied Deep Learning (PhD, TU Wien)  
+**Course:** Applied Deep Learning (PhD, TU Graz — co-registered at TU Wien)  
 
 ---
 
