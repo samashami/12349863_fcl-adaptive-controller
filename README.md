@@ -7,14 +7,26 @@
 
 ---
 
-## 1. Topic & Goal
+## 1. Context and Motivation
+
+In many real-world applications, data are **distributed across multiple devices** (federated setting) and the **data distribution changes over time** (continual setting).  
+- **Federated Learning (FL)** trains a global model on several clients without moving the raw data off the devices.  
+- **Continual Learning (CL)** trains a model on a sequence of tasks or data batches over time.
+
+**Federated-Continual Learning (FCL)** combines both: multiple clients each receive a stream of data over time. A key challenge in CL and FCL is **catastrophic forgetting** – when the model updates on new data and loses performance on previously seen classes or tasks.
+
+In this project, I work on a standard **image classification** task on **CIFAR-100** using a **ResNet-18** backbone. The goal is to train a federated-continual classifier that maintains good overall accuracy across all classes while reducing catastrophic forgetting by using an **adaptive policy controller** that tunes learning rate and replay ratio during training.
+
+---
+
+## 2. Topic & Goal
 This project reproduces the baseline setup from my previous work on **Federated-Continual Learning (FCL)** using CIFAR-100 and a ResNet-18 backbone, then extends it with an **adaptive policy controller** that dynamically tunes hyperparameters (learning rate, replay ratio) during training.  
 The goal is to improve generalization and reduce catastrophic forgetting.  
 This controller design also lays the foundation for a future **LLM-guided policy module** as part of my ongoing PhD research.
 
 ---
 
-## 2. Related Work
+## 3. Related Work
 1. **Shami, S. et al. (2024)** – *Federated Continual Learning for Vision-Based Plastic Classification in Recycling*, *Waste Management Journal (Elsevier)*.  
 2. **Aberger, J., Shami, S. et al. (2024)** – *Prototype of AI-Powered Assistance System for Digitalisation of Manual Sorting*, *Waste Management Journal (Elsevier)*.  
 3. **Shami, S. et al. (2024)** – *Comparative Analysis of Transfer and Continual Learning for Particle Classification in Plastic Sorting*, *Recy&DepoTech Conference 2024*, pp. 585–592.  
@@ -22,7 +34,7 @@ This controller design also lays the foundation for a future **LLM-guided policy
 
 ---
 
-## 3. Approach Summary
+## 4. Approach Summary
 ### Baseline (Reproduction)
 - **Dataset:** CIFAR-100 (50 k train / 10 k test).  
 - **Split:** 45 k train / 5 k val / 10 k test.  
@@ -42,7 +54,7 @@ Future extension will replace the rule-based controller with an **LLM-guided pol
 
 ---
 
-## 4. Dataset Description
+## 5. Dataset Description
 - **Dataset:** CIFAR-100 – 100 classes, 32×32 RGB images.  
 - **Transforms:** Resize to 224, normalize to ImageNet stats, random horizontal flip.  
 - **Federated split:** Equal IID across 4 clients (45 k train).  
@@ -50,7 +62,7 @@ Future extension will replace the rule-based controller with an **LLM-guided pol
 
 ---
 
-## 5. Work Breakdown & Time Estimates
+## 6. Work Breakdown & Time Estimates
 
 | Work Package | Tasks | Time (h) |
 |---------------|--------|----------:|
@@ -64,7 +76,7 @@ Future extension will replace the rule-based controller with an **LLM-guided pol
 
 ---
 
-## 6. Current Status
+## 7. Current Status
 - ✅ Baseline FCL training + validation implemented.  
 - ✅ Replay buffer and 7-stage CL schedule in place.  
 - ✅ Results exported to CSV for reproducible comparison.  
