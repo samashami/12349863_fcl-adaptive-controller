@@ -1,4 +1,4 @@
-# Applied Deep Learning – Assignment 1 (Initiate)
+# Applied Deep Learning – Assignments 1 & 2
 
 **Working Title:** Federated-Continual Learning with an Adaptive Policy Controller (LLM-ready roadmap)  
 **Project Type:** Reproduction + Extension (research-engineering hybrid)  
@@ -7,77 +7,149 @@
 
 ---
 
+# Assignment 1 – Initiate
+
 ## 1. Context and Motivation
+In many real-world applications, data are **distributed across multiple devices** (federated setting) and the **data distribution changes over time** (continual setting).
 
-In many real-world applications, data are **distributed across multiple devices** (federated setting) and the **data distribution changes over time** (continual setting).  
-- **Federated Learning (FL)** trains a global model on several clients without moving the raw data off the devices.  
-- **Continual Learning (CL)** trains a model on a sequence of tasks or data batches over time.
+- **Federated Learning (FL)** trains a global model across several clients without sharing raw data.  
+- **Continual Learning (CL)** trains a model on a sequence of evolving tasks or data batches.  
 
-**Federated-Continual Learning (FCL)** combines both: multiple clients each receive a stream of data over time. A key challenge in CL and FCL is **catastrophic forgetting** – when the model updates on new data and loses performance on previously seen classes or tasks.
+**Federated-Continual Learning (FCL)** combines both: each client receives a data stream over time.  
+A major challenge is **catastrophic forgetting**—when new updates overwrite previously learned knowledge.
 
-In this project, I work on a standard **image classification** task on **CIFAR-100** using a **ResNet-18** backbone. The goal is to train a federated-continual classifier that maintains good overall accuracy across all classes while reducing catastrophic forgetting by using an **adaptive policy controller** that tunes learning rate and replay ratio during training.
+This project builds an **image classification** pipeline on **CIFAR-100** using a **ResNet-18** backbone and evaluates how an **adaptive policy controller** can reduce forgetting and improve generalization.
 
 ---
 
 ## 2. Topic & Goal
-This project reproduces the baseline setup from my previous work on **Federated-Continual Learning (FCL)** using CIFAR-100 and a ResNet-18 backbone, then extends it with an **adaptive policy controller** that dynamically tunes hyperparameters (learning rate, replay ratio) during training.  
-The goal is to improve generalization and reduce catastrophic forgetting.  
-This controller design also lays the foundation for a future **LLM-guided policy module** as part of my ongoing PhD research.
+Reproduce the baseline FCL pipeline from previous work (CIFAR-100 + ResNet-18 + replay).  
+Then extend it by integrating a **dynamic hyperparameter controller** that adjusts learning rate and replay ratio during training.
+
+This serves as both a course project and as groundwork for a future **LLM-guided policy controller** in my PhD research.
 
 ---
 
 ## 3. Related Work
-1. **Shami, S. et al. (2024)** – *Federated Continual Learning for Vision-Based Plastic Classification in Recycling*, *Waste Management Journal (Elsevier)*.  
-2. **Aberger, J., Shami, S. et al. (2024)** – *Prototype of AI-Powered Assistance System for Digitalisation of Manual Sorting*, *Waste Management Journal (Elsevier)*.  
-3. **Shami, S. et al. (2024)** – *Comparative Analysis of Transfer and Continual Learning for Particle Classification in Plastic Sorting*, *Recy&DepoTech Conference 2024*, pp. 585–592.  
-4. **Shami, S. et al. (2024)** – *A Vision-Based Trash Particle Classification System for Sorting Facilities*, *13th Science Congress on Circular and Resource Economy*, pp. 35–42.
+1. Shami, S. et al. (2024) — *Federated Continual Learning for Vision-Based Plastic Classification*.  
+2. Aberger, J., Shami, S. et al. (2024) — *AI-Powered Assistance System for Manual Sorting*.  
+3. Shami, S. et al. (2024) — *Comparative Analysis of Transfer and Continual Learning*.  
+4. Shami, S. et al. (2024) — *Vision-Based Trash Particle Classification System*.
 
 ---
 
 ## 4. Approach Summary
+
 ### Baseline (Reproduction)
-- **Dataset:** CIFAR-100 (50 k train / 10 k test).  
-- **Split:** 45 k train / 5 k val / 10 k test.  
-- **Federated setup:** 4 clients, equal-size IID splits of the 45 k training portion.  
-- **Continual setup:** 7 CL batches per client (≈46 % initial + 6 increments).  
-- **Model:** ResNet-18 (ImageNet-pretrained).  
-- **Training:** Adam (lr = 1e-4), batch = 256, replay ratio = 0.5, num_workers = 4.  
-- **Validation:** Early stopping (patience = 5) to curb overfitting.  
-- **Logging:** `fcl_run_results.csv`, `fcl_run_summary.csv`, `fcl_run_cl_batches.csv`.
+- Dataset: CIFAR-100 (50k train, 10k test)
+- Split: 45k train / 5k val / 10k test  
+- Federated: 4 IID clients  
+- Continual: 7 data batches per client  
+- Model: ResNet-18 (ImageNet-pretrained)  
+- Training: Adam (lr=1e-4), batch size=256, replay ratio=0.5  
+- Logging: CSV files for reproducibility
 
 ### Extension (Controller)
-- Add a **policy controller** to adapt `lr` and `replay ratio` each FL round using validation signals (accuracy trend + forgetting proxy).  
-- Evaluate improvements over the baseline in **accuracy** and **forgetting metrics**.
+Rule-based controller adjusting:
+- learning rate  
+- replay ratio  
+based on validation accuracy trends and forgetting proxy.
 
-### PhD Roadmap
-Future extension will replace the rule-based controller with an **LLM-guided policy**, prompted by run summaries and guided by safety / reproducibility constraints.
+### Long-Term (PhD)
+LLM-guided policy controller using run metadata.
 
 ---
 
 ## 5. Dataset Description
-- **Dataset:** CIFAR-100 – 100 classes, 32×32 RGB images.  
-- **Transforms:** Resize to 224, normalize to ImageNet stats, random horizontal flip.  
-- **Federated split:** Equal IID across 4 clients (45 k train).  
-- **Continual schedule:** 7 batches per client (1 large initial + 6 increments).
+- CIFAR-100 (100 classes, 32×32 RGB)  
+- Preprocessing: resize to 224, ImageNet normalization  
+- Federated: equal IID split across 4 clients  
+- Continual: 7-stage batch schedule
 
 ---
 
-## 6. Work Breakdown & Time Estimates
+## 6. Work Breakdown & Time Estimates (Assignment 1)
 
 | Work Package | Tasks | Time (h) |
 |---------------|--------|----------:|
-| **Dataset Preparation** | Download, verify splits, build 4-client and 7-batch splits | 6 |
-| **Network Design & Build** | Implement ResNet-18 + replay + early stopping + logging | 8 |
-| **Training & Fine-Tuning** | Baseline + controller runs, evaluation & plots | 20 |
-| **Demo / Presentation Artifact** | Create notebook, plots, README polish | 6 |
-| **Final Report** | Baseline vs controller analysis, discussion | 10 |
-| **Presentation Slides** | Summarize problem, method, results, future plan | 6 |
-| **Total** | | **≈ 56 hours** |
+| Dataset Preparation | Build splits, 4 clients, 7 batches | 6 |
+| Network Build | ResNet-18, replay, early stopping, logging | 8 |
+| Training & Fine-Tuning | Baseline + controller runs | 20 |
+| Demo & Figures | Notebook, plots, README polish | 6 |
+| Final Report | Analysis & discussion | 10 |
+| Presentation Slides | Method + results | 6 |
+| **Total** | | **≈ 56 h** |
 
 ---
 
-## 7. Current Status
-- ✅ Baseline FCL training + validation implemented.  
-- ✅ Replay buffer and 7-stage CL schedule in place.  
-- ✅ Results exported to CSV for reproducible comparison.  
-- ✅ Initial controller integration tested (promising gains).
+# Assignment 2 – Hacking
+
+## 7. Error Metric and Targets
+
+### Primary Metric  
+**Top-1 Test Accuracy** on CIFAR-100.
+
+### Secondary Metric (research-oriented)  
+Average accuracy across CL batches + simple forgetting measure.
+
+### Targets  
+- Baseline FCL: **≥ 60%** top-1 accuracy  
+- Tuned/controller: **≥ 65%** top-1 accuracy + reduced forgetting
+
+---
+
+## 8. Baseline Pipeline (Implemented)
+- CIFAR-100 classification using ResNet-18  
+- 4 federated clients with 7 continual updates  
+- Adam optimizer, lr=1e-4  
+- Replay buffer active (ratio=0.5)  
+- CSV logs collected for each round/task  
+- Early stopping on validationset
+
+*(Final achieved metrics will be added after experiments.)*
+
+---
+
+## 9. Time Tracking (Assignment 2)
+
+| Work Package                   | Planned (h) | Spent (h) |
+|--------------------------------|------------:|----------:|
+| Dataset preparation & splits   | 6           | __ |
+| Baseline implementation        | 8           | __ |
+| Training & hyperparam search   | 20          | __ |
+| Controller integration         | 8           | __ |
+| Analysis & plots               | 6           | __ |
+| README / documentation         | 4           | __ |
+| **Total**                      | **52**      | **__** |
+
+---
+
+# 10. Repository Structure (current & planned)
+
+12349863_fcl-adaptive-controller/
+│
+├── README.md
+├── SUBMISSION.md
+├── requirements.txt                # (planned)
+│
+├── src/                            # (planned)
+│   ├── data.py
+│   ├── model.py
+│   ├── train_baseline.py
+│   ├── controller.py
+│   └── __init__.py
+│
+├── notebooks/                      # (planned)
+│   └── exploration.ipynb
+│
+└── results/                        # (planned)
+    └── runs/
+        └── <date_run_folder>/
+            ├── fcl_run_results.csv
+            ├── fcl_run_summary.csv
+            └── fcl_run_cl_batches.csv
+
+---
+
+# 11. Contact & Submission
+Assignment submission via email per course guidelines.
