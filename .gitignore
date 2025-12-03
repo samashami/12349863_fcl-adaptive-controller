@@ -1,0 +1,8 @@
+# Ignore local data and large artifacts
+data/
+*.tar.gz
+
+# Python junk
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

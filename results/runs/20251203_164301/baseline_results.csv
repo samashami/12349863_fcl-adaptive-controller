@@ -1,0 +1,2 @@
+cl_batch,epoch,train_loss,train_acc,val_acc,test_acc
+0,0,4.241922235488891,0.1060718201754386,0.2248,0.2165
