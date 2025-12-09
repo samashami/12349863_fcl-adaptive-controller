@@ -128,7 +128,6 @@ Final results (last continual batch):
 - Results file: `results/runs/20251209_121214/baseline_results.csv`
 
 The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy**, demonstrating a functional end-to-end continual image classification pipeline. Further improvements via adaptive controllers or hyperparameter tuning are left as future work.
-```
 
 ## 9. Time Tracking (Assignment 2)
 
@@ -145,7 +144,6 @@ The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy
 
 ## 10. Repository Structure (current & planned)
 
-```text
 12349863_fcl-adaptive-controller/
 ├── README.md
 ├── SUBMISSION.md
