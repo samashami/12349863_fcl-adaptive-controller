@@ -31,8 +31,8 @@ This serves as both a course project and as groundwork for a future **LLM-guided
 ---
 
 ## 3. Related Work
-1. Shami, S. et al. (2024) — *Federated Continual Learning for Vision-Based Plastic Classification*.  
-2. Aberger, J., Shami, S. et al. (2024) — *AI-Powered Assistance System for Manual Sorting*.  
+1. Shami, S. et al. (2025) — *Federated Continual Learning for Vision-Based Plastic Classification*.  
+2. Aberger, J., Shami, S. et al. (2025) — *AI-Powered Assistance System for Manual Sorting*.  
 3. Shami, S. et al. (2024) — *Comparative Analysis of Transfer and Continual Learning*.  
 4. Shami, S. et al. (2024) — *Vision-Based Trash Particle Classification System*.
 
