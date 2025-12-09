@@ -98,15 +98,30 @@ Average accuracy across CL batches + simple forgetting measure.
 
 ---
 
-## 8. Baseline Pipeline (Implemented)
-- CIFAR-100 classification using ResNet-18  
-- 4 federated clients with 7 continual updates  
-- Adam optimizer, lr=1e-4  
-- Replay buffer active (ratio=0.5)  
-- CSV logs collected for each round/task  
-- Early stopping on validationset
+## 8. Baseline Pipeline & Results (Assignment 2)
 
-*(Final achieved metrics will be added after experiments.)*
+### 8.1 Experimental Setup
+
+All substantial experiments for Assignment 2 were executed on **Kaggle (GPU runtime)**.
+
+- Model: ResNet-18 (ImageNet-pretrained)
+- Dataset: CIFAR-100
+- Train / validation / test split: 45k / 5k / 10k
+- Continual setup: 5 continual-learning batches (single client simulation)
+- Optimizer: Adam (lr = 1e-4)
+- Batch size: 128
+- Epochs per CL batch: 2
+
+### 8.2 Achieved Results
+
+Baseline experiment command:
+
+```bash
+python src/train_baseline.py \
+    --epochs-per-batch=2 \
+    --num-cl-batches=5 \
+    --batch-size=128
+
 
 ---
 
@@ -114,17 +129,17 @@ Average accuracy across CL batches + simple forgetting measure.
 
 | Work Package                   | Planned (h) | Spent (h) |
 |--------------------------------|------------:|----------:|
-| Dataset preparation & splits   | 6           | __ |
-| Baseline implementation        | 8           | __ |
-| Training & hyperparam search   | 20          | __ |
-| Controller integration         | 8           | __ |
-| Analysis & plots               | 6           | __ |
-| README / documentation         | 4           | __ |
-| **Total**                      | **52**      | **__** |
+| Dataset preparation & splits   | 6           | 3 |
+| Baseline implementation        | 8           | 7 |
+| Training & hyperparam search   | 20          | 9 |
+| Controller integration         | 8           | 0 |
+| Analysis & plots               | 6           | 3 |
+| README / documentation         | 4           | 3 |
+| **Total**                      | **52**      | **25** |
 
 ---
 
-# 10. Repository Structure (current & planned)
+## 10. Repository Structure (current & planned)
 
 12349863_fcl-adaptive-controller/
 │
