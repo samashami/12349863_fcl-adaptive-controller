@@ -44,9 +44,9 @@ This serves as both a course project and as groundwork for a future **LLM-guided
 - Dataset: CIFAR-100 (50k train, 10k test)
 - Split: 45k train / 5k val / 10k test  
 - Federated: 4 IID clients  
-- Continual: 7 data batches per client  
+- Continual: 5 data batches per client  
 - Model: ResNet-18 (ImageNet-pretrained)  
-- Training: Adam (lr=1e-4), batch size=256, replay ratio=0.5  
+- Training: Adam (lr=1e-4), batch size=128, replay ratio=0.5  
 - Logging: CSV files for reproducibility
 
 ### Extension (Controller)
@@ -64,7 +64,7 @@ LLM-guided policy controller using run metadata.
 - CIFAR-100 (100 classes, 32×32 RGB)  
 - Preprocessing: resize to 224, ImageNet normalization  
 - Federated: equal IID split across 4 clients  
-- Continual: 7-stage batch schedule
+- Continual: 5-stage batch schedule
 
 ---
 
@@ -72,7 +72,7 @@ LLM-guided policy controller using run metadata.
 
 | Work Package | Tasks | Time (h) |
 |---------------|--------|----------:|
-| Dataset Preparation | Build splits, 4 clients, 7 batches | 6 |
+| Dataset Preparation | Build splits, 4 clients, 5 batches | 6 |
 | Network Build | ResNet-18, replay, early stopping, logging | 8 |
 | Training & Fine-Tuning | Baseline + controller runs | 20 |
 | Demo & Figures | Notebook, plots, README polish | 6 |
@@ -93,7 +93,7 @@ LLM-guided policy controller using run metadata.
 Average accuracy across CL batches + simple forgetting measure.
 
 ### Targets  
-- Baseline FCL: **≥ 60%** top-1 accuracy  
+- Baseline CL: **≥ 60%** top-1 accuracy  
 - Tuned/controller: **≥ 65%** top-1 accuracy + reduced forgetting
 
 ## 8. Baseline Pipeline & Results (Assignment 2)
