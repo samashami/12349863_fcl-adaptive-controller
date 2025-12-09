@@ -100,7 +100,7 @@ Average accuracy across CL batches + simple forgetting measure.
 
 ### 8.1 Experimental Setup
 
-All substantial experiments for Assignment 2 were executed on **Kaggle (GPU runtime)**.
+For Assignment 2, a simplified continual-learning-only baseline (single-client simulation) is implemented as a first step toward the full Federated-Continual Learning setup outlined in Assignment 1. All substantial experiments for Assignment 2 were executed on **Kaggle (GPU runtime)**.
 
 - Model: ResNet-18 (ImageNet-pretrained)
 - Dataset: CIFAR-100
@@ -166,4 +166,3 @@ The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy
         │   └── baseline_results.csv
         └── 20251209_121214/
             └── baseline_results.csv
-            ```
