@@ -96,8 +96,6 @@ Average accuracy across CL batches + simple forgetting measure.
 - Baseline FCL: **≥ 60%** top-1 accuracy  
 - Tuned/controller: **≥ 65%** top-1 accuracy + reduced forgetting
 
----
-
 ## 8. Baseline Pipeline & Results (Assignment 2)
 
 ### 8.1 Experimental Setup
@@ -121,9 +119,16 @@ python src/train_baseline.py \
     --epochs-per-batch=2 \
     --num-cl-batches=5 \
     --batch-size=128
+```
 
+Final results (last continual batch):
 
----
+- **Top-1 test accuracy:** **61.39 %**
+- **Validation accuracy:** **61.76 %**
+- Results file: `results/runs/20251209_121214/baseline_results.csv`
+
+The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy**, demonstrating a functional end-to-end continual image classification pipeline. Further improvements via adaptive controllers or hyperparameter tuning are left as future work.
+```
 
 ## 9. Time Tracking (Assignment 2)
 
@@ -137,34 +142,29 @@ python src/train_baseline.py \
 | README / documentation         | 4           | 3 |
 | **Total**                      | **52**      | **25** |
 
----
 
 ## 10. Repository Structure (current & planned)
 
+```text
 12349863_fcl-adaptive-controller/
-│
 ├── README.md
 ├── SUBMISSION.md
-├── requirements.txt                # (planned)
+├── requirements.txt              # planned
 │
-├── src/                            # (planned)
+├── src/                           # planned
 │   ├── data.py
 │   ├── model.py
 │   ├── train_baseline.py
 │   ├── controller.py
 │   └── __init__.py
 │
-├── notebooks/                      # (planned)
+├── notebooks/                     # planned
 │   └── exploration.ipynb
 │
-└── results/                        # (planned)
+└── results/                       # current & planned
     └── runs/
-        └── <date_run_folder>/
-            ├── fcl_run_results.csv
-            ├── fcl_run_summary.csv
-            └── fcl_run_cl_batches.csv
-
----
-
-# 11. Contact & Submission
-Assignment submission via email per course guidelines.
+        ├── 20251203_164301/
+        │   └── baseline_results.csv
+        └── 20251209_121214/
+            └── baseline_results.csv
+```
