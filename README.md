@@ -144,6 +144,7 @@ The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy
 
 ## 10. Repository Structure (current & planned)
 
+```text
 12349863_fcl-adaptive-controller/
 ├── README.md
 ├── SUBMISSION.md
@@ -165,4 +166,4 @@ The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy
         │   └── baseline_results.csv
         └── 20251209_121214/
             └── baseline_results.csv
-```
+            ```
