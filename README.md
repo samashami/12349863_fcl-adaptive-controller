@@ -1,4 +1,4 @@
-# Applied Deep Learning – Assignments 1 & 2
+# Applied Deep Learning – Assignments 1–3
 
 **Working Title:** Federated-Continual Learning with an Adaptive Policy Controller (LLM-ready roadmap)  
 **Project Type:** Reproduction + Extension (research-engineering hybrid)  
@@ -166,3 +166,27 @@ The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy
         │   └── baseline_results.csv
         └── 20251209_121214/
             └── baseline_results.csv
+
+
+# Assignment 3 – Demo Application
+
+This assignment provides a minimal, reproducible demo of a Federated Continual Learning (FCL) system.
+
+The goal is to demonstrate:
+- end-to-end training
+- model checkpointing
+- inference using a trained model
+- reproducibility via logged CSV outputs
+
+## Demo Overview
+
+The demo consists of:
+- A lightweight FCL training script
+- A saved global model checkpoint
+- A simple inference script
+- Logged metrics for inspection
+
+### Run Training
+```
+python -m assignment3.src.run_fcl --rounds 1 --epochs 1 --device cpu
+```
