@@ -166,7 +166,7 @@ The baseline model meets the predefined target of **≥ 60 % top-1 test accuracy
         │   └── baseline_results.csv
         └── 20251209_121214/
             └── baseline_results.csv
-
+```
 
 # Assignment 3 – Demo Application
 
